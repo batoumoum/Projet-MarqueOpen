@@ -1,0 +1,41 @@
+﻿@model MarqueOpen.LigneOperation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LigneOperation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Temps)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Temps)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoutHoraire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoutHoraire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Operation.Descriptif)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Operation.Descriptif)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Retour", "Details", "Devis", new { id = Model.Ligne.IdDevis }, null)
+</p>

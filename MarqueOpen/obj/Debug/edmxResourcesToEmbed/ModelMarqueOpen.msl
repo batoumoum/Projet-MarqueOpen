@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MarqueOpenModelStoreContainer" CdmEntityContainer="MarqueOpenEntities">
+    <EntitySetMapping Name="Concessionnaire">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Concessionnaire">
+        <MappingFragment StoreEntitySet="Concessionnaire">
+          <ScalarProperty Name="IdConcessionnaire" ColumnName="IdConcessionnaire" />
+          <ScalarProperty Name="NomConcessionnaire" ColumnName="NomConcessionnaire" />
+          <ScalarProperty Name="Adr_Rue" ColumnName="Adr_Rue" />
+          <ScalarProperty Name="Adr_Numero" ColumnName="Adr_Numero" />
+          <ScalarProperty Name="IdMarque" ColumnName="IdMarque" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DegreQualification">
+      <EntityTypeMapping TypeName="MarqueOpenModel.DegreQualification">
+        <MappingFragment StoreEntitySet="DegreQualification">
+          <ScalarProperty Name="IdQualification" ColumnName="IdQualification" />
+          <ScalarProperty Name="Degre" ColumnName="Degre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Devis">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Devis">
+        <MappingFragment StoreEntitySet="Devis">
+          <ScalarProperty Name="IdDevis" ColumnName="IdDevis" />
+          <ScalarProperty Name="NumDevis" ColumnName="NumDevis" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Descriptif" ColumnName="Descriptif" />
+          <ScalarProperty Name="IdPossession" ColumnName="IdPossession" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FactureDueNonPayee">
+      <EntityTypeMapping TypeName="MarqueOpenModel.FactureDueNonPayee">
+        <MappingFragment StoreEntitySet="FactureDueNonPayee">
+          <ScalarProperty Name="IdFactureDueNonPaye" ColumnName="IdFactureDueNonPaye" />
+          <ScalarProperty Name="IdVisite" ColumnName="IdVisite" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Montant" ColumnName="Montant" />
+          <ScalarProperty Name="DateEcheance" ColumnName="DateEcheance" />
+          <ScalarProperty Name="MontantEnAccompte" ColumnName="MontantEnAccompte" />
+          <ScalarProperty Name="Descriptif" ColumnName="Descriptif" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Jante">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Jante">
+        <MappingFragment StoreEntitySet="Jante">
+          <ScalarProperty Name="CodeJante" ColumnName="CodeJante" />
+          <ScalarProperty Name="Pouce" ColumnName="Pouce" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Langue">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Langue">
+        <MappingFragment StoreEntitySet="Langue">
+          <ScalarProperty Name="CodeLangue" ColumnName="CodeLangue" />
+          <ScalarProperty Name="LibelleLangue" ColumnName="LibelleLangue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LanguePiece">
+      <EntityTypeMapping TypeName="MarqueOpenModel.LanguePiece">
+        <MappingFragment StoreEntitySet="LanguePiece">
+          <ScalarProperty Name="CodeLangue" ColumnName="CodeLangue" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="TraductionPiece" ColumnName="TraductionPiece" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LieuStockage">
+      <EntityTypeMapping TypeName="MarqueOpenModel.LieuStockage">
+        <MappingFragment StoreEntitySet="LieuStockage">
+          <ScalarProperty Name="CodeLieuStockage" ColumnName="CodeLieuStockage" />
+          <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ligne">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Ligne">
+        <MappingFragment StoreEntitySet="Ligne">
+          <ScalarProperty Name="IdLigne" ColumnName="IdLigne" />
+          <ScalarProperty Name="NumeroLigne" ColumnName="NumeroLigne" />
+          <ScalarProperty Name="TypeLigne" ColumnName="TypeLigne" />
+          <ScalarProperty Name="IdDevis" ColumnName="IdDevis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LigneCommentaire">
+      <EntityTypeMapping TypeName="MarqueOpenModel.LigneCommentaire">
+        <MappingFragment StoreEntitySet="LigneCommentaire">
+          <ScalarProperty Name="IdLigne" ColumnName="IdLigne" />
+          <ScalarProperty Name="Texte" ColumnName="Texte" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LigneOperation">
+      <EntityTypeMapping TypeName="MarqueOpenModel.LigneOperation">
+        <MappingFragment StoreEntitySet="LigneOperation">
+          <ScalarProperty Name="IdLigne" ColumnName="IdLigne" />
+          <ScalarProperty Name="Temps" ColumnName="Temps" />
+          <ScalarProperty Name="CoutHoraire" ColumnName="CoutHoraire" />
+          <ScalarProperty Name="IdOperation" ColumnName="IdOperation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LignePiece">
+      <EntityTypeMapping TypeName="MarqueOpenModel.LignePiece">
+        <MappingFragment StoreEntitySet="LignePiece">
+          <ScalarProperty Name="IdLigne" ColumnName="IdLigne" />
+          <ScalarProperty Name="Prix" ColumnName="Prix" />
+          <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListePieceConsommable">
+      <EntityTypeMapping TypeName="MarqueOpenModel.ListePieceConsommable">
+        <MappingFragment StoreEntitySet="ListePieceConsommable">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="IdVisite" ColumnName="IdVisite" />
+          <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+          <ScalarProperty Name="Prix" ColumnName="Prix" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marque">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Marque">
+        <MappingFragment StoreEntitySet="Marque">
+          <ScalarProperty Name="IdMarque" ColumnName="IdMarque" />
+          <ScalarProperty Name="NomMarque" ColumnName="NomMarque" />
+          <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modele">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Modele">
+        <MappingFragment StoreEntitySet="Modele">
+          <ScalarProperty Name="IdModele" ColumnName="IdModele" />
+          <ScalarProperty Name="NomModele" ColumnName="NomModele" />
+          <ScalarProperty Name="IdMarque" ColumnName="IdMarque" />
+          <ScalarProperty Name="Descriptif" ColumnName="Descriptif" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NumTelOuvrier">
+      <EntityTypeMapping TypeName="MarqueOpenModel.NumTelOuvrier">
+        <MappingFragment StoreEntitySet="NumTelOuvrier">
+          <ScalarProperty Name="IdNumTelOuvrier" ColumnName="IdNumTelOuvrier" />
+          <ScalarProperty Name="NumTelOuvrier1" ColumnName="NumTelOuvrier" />
+          <ScalarProperty Name="CodeOuvrier" ColumnName="CodeOuvrier" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NumTelProprio">
+      <EntityTypeMapping TypeName="MarqueOpenModel.NumTelProprio">
+        <MappingFragment StoreEntitySet="NumTelProprio">
+          <ScalarProperty Name="IdNumTelProprio" ColumnName="IdNumTelProprio" />
+          <ScalarProperty Name="NumTelProprio1" ColumnName="NumTelProprio" />
+          <ScalarProperty Name="IdProprietaire" ColumnName="IdProprietaire" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Operation">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Operation">
+        <MappingFragment StoreEntitySet="Operation">
+          <ScalarProperty Name="IdOperation" ColumnName="IdOperation" />
+          <ScalarProperty Name="CodeOperation" ColumnName="CodeOperation" />
+          <ScalarProperty Name="Descriptif" ColumnName="Descriptif" />
+          <ScalarProperty Name="DureeHabituelle" ColumnName="DureeHabituelle" />
+          <ScalarProperty Name="PrixUnitaire" ColumnName="PrixUnitaire" />
+          <ScalarProperty Name="CodeOuvrier" ColumnName="CodeOuvrier" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OperationVisite">
+      <EntityTypeMapping TypeName="MarqueOpenModel.OperationVisite">
+        <MappingFragment StoreEntitySet="OperationVisite">
+          <ScalarProperty Name="IdOperation" ColumnName="IdOperation" />
+          <ScalarProperty Name="IdVisite" ColumnName="IdVisite" />
+          <ScalarProperty Name="DureeEffective" ColumnName="DureeEffective" />
+          <ScalarProperty Name="Prix" ColumnName="Prix" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OptionV">
+      <EntityTypeMapping TypeName="MarqueOpenModel.OptionV">
+        <MappingFragment StoreEntitySet="OptionV">
+          <ScalarProperty Name="IdOption" ColumnName="IdOption" />
+          <ScalarProperty Name="CodeOption" ColumnName="CodeOption" />
+          <ScalarProperty Name="NomOption" ColumnName="NomOption" />
+          <ScalarProperty Name="Descriptif" ColumnName="Descriptif" />
+          <ScalarProperty Name="Prix" ColumnName="Prix" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ouvrier">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Ouvrier">
+        <MappingFragment StoreEntitySet="Ouvrier">
+          <ScalarProperty Name="CodeOuvrier" ColumnName="CodeOuvrier" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="DateEntree" ColumnName="DateEntree" />
+          <ScalarProperty Name="IdQualification" ColumnName="IdQualification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PieceConsommable">
+      <EntityTypeMapping TypeName="MarqueOpenModel.PieceConsommable">
+        <MappingFragment StoreEntitySet="PieceConsommable">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Denomination" ColumnName="Denomination" />
+          <ScalarProperty Name="PrixUnitaire" ColumnName="PrixUnitaire" />
+          <ScalarProperty Name="QuantiteTheorique" ColumnName="QuantiteTheorique" />
+          <ScalarProperty Name="DateDernierReleve" ColumnName="DateDernierReleve" />
+          <ScalarProperty Name="QuantiteStockDernierReleve" ColumnName="QuantiteStockDernierReleve" />
+          <ScalarProperty Name="Consommable" ColumnName="Consommable" />
+          <ScalarProperty Name="CodeLieuStockage" ColumnName="CodeLieuStockage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Possession">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Possession">
+        <MappingFragment StoreEntitySet="Possession">
+          <ScalarProperty Name="IdPossession" ColumnName="IdPossession" />
+          <ScalarProperty Name="IdVehicule" ColumnName="IdVehicule" />
+          <ScalarProperty Name="NumMineralogique" ColumnName="NumMineralogique" />
+          <ScalarProperty Name="DateAchat" ColumnName="DateAchat" />
+          <ScalarProperty Name="DateVendu" ColumnName="DateVendu" />
+          <ScalarProperty Name="DateImmatriculation" ColumnName="DateImmatriculation" />
+          <ScalarProperty Name="IdProprietaire" ColumnName="IdProprietaire" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Proprietaire">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Proprietaire">
+        <MappingFragment StoreEntitySet="Proprietaire">
+          <ScalarProperty Name="IdProprietaire" ColumnName="IdProprietaire" />
+          <ScalarProperty Name="NumRegNational" ColumnName="NumRegNational" />
+          <ScalarProperty Name="NomProprio" ColumnName="NomProprio" />
+          <ScalarProperty Name="PrenomProprio" ColumnName="PrenomProprio" />
+          <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+          <ScalarProperty Name="CodeLangue" ColumnName="CodeLangue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Type">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Type">
+        <MappingFragment StoreEntitySet="Type">
+          <ScalarProperty Name="IdType" ColumnName="IdType" />
+          <ScalarProperty Name="NomTypeModele" ColumnName="NomTypeModele" />
+          <ScalarProperty Name="IdModele" ColumnName="IdModele" />
+          <ScalarProperty Name="Cylindree" ColumnName="Cylindree" />
+          <ScalarProperty Name="Motorisation" ColumnName="Motorisation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vehicule">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Vehicule">
+        <MappingFragment StoreEntitySet="Vehicule">
+          <ScalarProperty Name="IdVehicule" ColumnName="IdVehicule" />
+          <ScalarProperty Name="NumChassis" ColumnName="NumChassis" />
+          <ScalarProperty Name="AnneeFabrication" ColumnName="AnneeFabrication" />
+          <ScalarProperty Name="TypeVehicule" ColumnName="TypeVehicule" />
+          <ScalarProperty Name="ChargeMax" ColumnName="ChargeMax" />
+          <ScalarProperty Name="DateDernierControle" ColumnName="DateDernierControle" />
+          <ScalarProperty Name="IdType" ColumnName="IdType" />
+          <ScalarProperty Name="CodeJante" ColumnName="CodeJante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Visite">
+      <EntityTypeMapping TypeName="MarqueOpenModel.Visite">
+        <MappingFragment StoreEntitySet="Visite">
+          <ScalarProperty Name="IdVisite" ColumnName="IdVisite" />
+          <ScalarProperty Name="DateEntree" ColumnName="DateEntree" />
+          <ScalarProperty Name="NumVisite" ColumnName="NumVisite" />
+          <ScalarProperty Name="DateSortie" ColumnName="DateSortie" />
+          <ScalarProperty Name="CoutFactureVisite" ColumnName="CoutFactureVisite" />
+          <ScalarProperty Name="Descriptif" ColumnName="Descriptif" />
+          <ScalarProperty Name="IdPossession" ColumnName="IdPossession" />
+          <ScalarProperty Name="IdDevis" ColumnName="IdDevis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LangueConcessionnaire" TypeName="MarqueOpenModel.LangueConcessionnaire" StoreEntitySet="LangueConcessionnaire">
+      <EndProperty Name="Concessionnaire">
+        <ScalarProperty Name="IdConcessionnaire" ColumnName="IdConcessionnaire" />
+      </EndProperty>
+      <EndProperty Name="Langue">
+        <ScalarProperty Name="CodeLangue" ColumnName="CodeLangue" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="OptionModele" TypeName="MarqueOpenModel.OptionModele" StoreEntitySet="OptionModele">
+      <EndProperty Name="OptionV">
+        <ScalarProperty Name="IdOption" ColumnName="IdOption" />
+      </EndProperty>
+      <EndProperty Name="Type">
+        <ScalarProperty Name="IdType" ColumnName="IdType" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="OptionNonStandard" TypeName="MarqueOpenModel.OptionNonStandard" StoreEntitySet="OptionNonStandard">
+      <EndProperty Name="OptionV">
+        <ScalarProperty Name="IdOption" ColumnName="IdOption" />
+      </EndProperty>
+      <EndProperty Name="Vehicule">
+        <ScalarProperty Name="IdVehicule" ColumnName="IdVehicule" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

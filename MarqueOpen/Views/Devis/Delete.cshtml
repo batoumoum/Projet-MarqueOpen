@@ -1,0 +1,56 @@
+﻿@model MarqueOpen.Devis
+
+@{
+    ViewBag.Title = "Supprimer";
+}
+
+<h2>Supprimer</h2>
+
+<h3>Êtes-vous sûrs de vouloir supprimer le devis ?</h3>
+<div>
+    <h4>Devis</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Numéro devis
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumDevis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descriptif)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descriptif)
+        </dd>
+
+        <dt>
+            Numéro minéralogique
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Possession.NumMineralogique)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour à la liste", "Index")
+        </div>
+    }
+</div>

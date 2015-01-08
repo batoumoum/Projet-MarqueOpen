@@ -1,0 +1,139 @@
+﻿@model MarqueOpen.Devis
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Devis</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumDevis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumDevis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descriptif)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descriptif)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Possession.NumMineralogique)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Possession.NumMineralogique)
+        </dd>
+
+    </dl>
+</div>
+<hr />
+<p>
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    <b>@Html.ActionLink("Ajouter une opération", "Create", "LigneOperations", new { id = Model.IdDevis }, null)</b>
+</p>
+
+<table class="table table-bordered">
+    <tr>
+        <th width="200px">
+            Temps
+        </th>
+        <th width="200px">
+            Coût horaire
+        </th>
+        <th width="200px">
+            Descriptif
+        </th>
+        <th width="200px"></th>
+    </tr>
+
+    @foreach (var item in Model.Ligne)
+    {
+        if (item.TypeLigne == "o")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LigneOperation.Temps)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LigneOperation.CoutHoraire)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LigneOperation.Operation.Descriptif)
+                </td>
+                <td>
+                    @Html.ActionLink("Détails", "Details", "LigneOperations", new { id = item.IdLigne }, null) |
+                    @Html.ActionLink("Supprimer", "Delete", "LigneOperations", new { id = item.IdLigne }, null)
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<br />
+
+<p>
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    <b>@Html.ActionLink("Ajouter une pièce", "Create", "LignePieces", new { id = Model.IdDevis }, null)</b>    
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th width="200px">
+            Prix
+        </th>
+        <th width="200px">
+            Quantité
+        </th>
+        <th width="200px">
+            Dénomination
+        </th>
+        <th width="200px"></th>
+    </tr>
+
+    @foreach (var item in Model.Ligne)
+    {
+        if (item.TypeLigne == "p")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LignePiece.Prix)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LignePiece.Quantite)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LignePiece.PieceConsommable.Denomination)
+                </td>
+                <td>
+                    @Html.ActionLink("Détails", "Details", "LignePieces", new { id = item.IdLigne }, null) |
+                    @Html.ActionLink("Supprimer", "Delete", "LignePieces", new { id = item.IdLigne }, null)
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<hr />
+
+<p>
+    @Html.ActionLink("Retour à la liste des devis", "Index")
+</p>

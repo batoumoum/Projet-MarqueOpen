@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MarqueOpen.Devis>
+<h2>Liste des devis</h2>
+<hr />
+
+<p>
+    @Html.ActionLink("Encoder un nouveau devis", "Create", new object { }, htmlAttributes: new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumDevis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descriptif)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Possession.NumMineralogique)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumDevis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descriptif)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Possession.NumMineralogique)
+        </td>
+        <td>
+            @Html.ActionLink("Détails", "Details", new { id=item.IdDevis }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.IdDevis })
+        </td>
+    </tr>
+}
+
+</table>

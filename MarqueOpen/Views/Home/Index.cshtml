@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="jumbotron">
+    <h1>MarqueOpen</h1>
+    <p class="lead">Le plus grand garage spécialisé tout près de chez vous !</p>
+    <p>
+        @Html.ActionLink("Gestion des devis >>", "Index", "Devis", null, new { @class = "btn btn-primary btn-lg" })
+    </p>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <h3>Garage MarqueOpen, une satisfaction client depuis 1948</h3>
+
+        <p>
+            C’est en 1948 qu’a vu le jour le garage MarqueOpen, fondé par Vincent Robin. Depuis plusieurs générations, la concession n’a cessé de se développer et de proposer des services toujours plus performants et adaptés aux besoins du client.
+        </p>
+        <p>
+            Être à l’écoute du client et de ses attentes, Aurélien Robin et l’ensemble de l’équipe en ont fait une véritable vocation. Cela passe notamment par un ensemble de valeurs que la concession de Havelange met en œuvre chaque jour.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h3>Contact</h3>
+        <address>
+            MarqueOpen<br />
+            Rue de hiettine, 16<br />
+            5370 HAVELANGE, BELGIUM<br />
+            <abbr title="Phone">Téléphone:</abbr>
+            083/63.45.39
+        </address>
+
+        <address>
+            <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@marqueopen.com</a><br />
+            <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@marqueopen.com</a>
+        </address>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+﻿@model MarqueOpen.Devis
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Encoder un devis</h2>
+<hr />
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="NumDevis">Numéro du devis</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.NumDevis, new { @Value = ViewBag.NumeroDevis, @class = "form-control", @readonly="readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @id = "datepicker", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descriptif, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Descriptif, new { @class = "form-control", @rows = "3" })
+                @Html.ValidationMessageFor(model => model.Descriptif, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="IdProprietaire">Nom du propriétaire</label>
+            <div class="col-md-10">
+                <input id="IdProprietaire" name="IdProprietaire" class="ui-autocomplete" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="IdPossession">Plaque du véhicule</label>
+            <div class="col-md-10">
+                @Html.DropDownList("IdPossession", new SelectList(string.Empty, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdPossession, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Créer le devis" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Retour à la liste des devis", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $(function() {
+        $("#datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'yy-mm-dd',
+            firstDay: 1,
+
+            showAnim: "drop"
+        });
+
+        $("#IdProprietaire").autocomplete({
+            minLength: 0,
+            source: function (request, response) {
+                var url = "/Devis/AutoComplete";
+   
+                $.getJSON(url, { term: request.term }, function (data) {
+                    response(data);
+                })
+            },
+
+            change : function (event, ui) {
+                $("#IdPossession").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetNumMin")',
+                    dataType: 'json',
+                    data: { id: ui.item.id },
+
+                    success: function (plaques) {
+
+                        $.each(plaques, function (i, plaque) {
+                            $("#IdPossession").append('<option value="' + plaque.Value + '">' +
+                                 plaque.Text + '</option>');
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+  </script>
+}

@@ -1,0 +1,2064 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MarqueOpenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Concessionnaire">
+          <Key>
+            <PropertyRef Name="IdConcessionnaire" />
+          </Key>
+          <Property Name="IdConcessionnaire" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomConcessionnaire" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Adr_Rue" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Adr_Numero" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="IdMarque" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DegreQualification">
+          <Key>
+            <PropertyRef Name="IdQualification" />
+          </Key>
+          <Property Name="IdQualification" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Degre" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Devis">
+          <Key>
+            <PropertyRef Name="IdDevis" />
+          </Key>
+          <Property Name="IdDevis" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumDevis" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Descriptif" Type="varchar" MaxLength="510" Nullable="false" />
+          <Property Name="IdPossession" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FactureDueNonPayee">
+          <Key>
+            <PropertyRef Name="IdFactureDueNonPaye" />
+          </Key>
+          <Property Name="IdFactureDueNonPaye" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdVisite" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Montant" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="DateEcheance" Type="datetime" Nullable="false" />
+          <Property Name="MontantEnAccompte" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Descriptif" Type="varchar" MaxLength="510" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jante">
+          <Key>
+            <PropertyRef Name="CodeJante" />
+          </Key>
+          <Property Name="CodeJante" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pouce" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Langue">
+          <Key>
+            <PropertyRef Name="CodeLangue" />
+          </Key>
+          <Property Name="CodeLangue" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LibelleLangue" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LangueConcessionnaire">
+          <Key>
+            <PropertyRef Name="IdConcessionnaire" />
+            <PropertyRef Name="CodeLangue" />
+          </Key>
+          <Property Name="IdConcessionnaire" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeLangue" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LanguePiece">
+          <Key>
+            <PropertyRef Name="CodeLangue" />
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="CodeLangue" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="TraductionPiece" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LieuStockage">
+          <Key>
+            <PropertyRef Name="CodeLieuStockage" />
+          </Key>
+          <Property Name="CodeLieuStockage" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adresse" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ligne">
+          <Key>
+            <PropertyRef Name="IdLigne" />
+          </Key>
+          <Property Name="IdLigne" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroLigne" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="TypeLigne" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdDevis" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LigneCommentaire">
+          <Key>
+            <PropertyRef Name="IdLigne" />
+          </Key>
+          <Property Name="IdLigne" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Texte" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LigneOperation">
+          <Key>
+            <PropertyRef Name="IdLigne" />
+          </Key>
+          <Property Name="IdLigne" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Temps" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="CoutHoraire" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="IdOperation" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LignePiece">
+          <Key>
+            <PropertyRef Name="IdLigne" />
+          </Key>
+          <Property Name="IdLigne" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Prix" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Quantite" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="Code" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListePieceConsommable">
+          <Key>
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="IdVisite" />
+          </Key>
+          <Property Name="Code" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdVisite" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Quantite" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="Prix" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marque">
+          <Key>
+            <PropertyRef Name="IdMarque" />
+          </Key>
+          <Property Name="IdMarque" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomMarque" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DateCreation" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modele">
+          <Key>
+            <PropertyRef Name="IdModele" />
+          </Key>
+          <Property Name="IdModele" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomModele" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IdMarque" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Descriptif" Type="varchar" MaxLength="510" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NumTelOuvrier">
+          <Key>
+            <PropertyRef Name="IdNumTelOuvrier" />
+          </Key>
+          <Property Name="IdNumTelOuvrier" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumTelOuvrier" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="CodeOuvrier" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NumTelProprio">
+          <Key>
+            <PropertyRef Name="IdNumTelProprio" />
+          </Key>
+          <Property Name="IdNumTelProprio" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumTelProprio" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="IdProprietaire" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Operation">
+          <Key>
+            <PropertyRef Name="IdOperation" />
+          </Key>
+          <Property Name="IdOperation" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeOperation" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Descriptif" Type="varchar" MaxLength="510" Nullable="false" />
+          <Property Name="DureeHabituelle" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="PrixUnitaire" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="CodeOuvrier" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OperationVisite">
+          <Key>
+            <PropertyRef Name="IdOperation" />
+            <PropertyRef Name="IdVisite" />
+          </Key>
+          <Property Name="IdOperation" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdVisite" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="DureeEffective" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="Prix" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OptionModele">
+          <Key>
+            <PropertyRef Name="IdOption" />
+            <PropertyRef Name="IdType" />
+          </Key>
+          <Property Name="IdOption" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdType" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OptionNonStandard">
+          <Key>
+            <PropertyRef Name="IdOption" />
+            <PropertyRef Name="IdVehicule" />
+          </Key>
+          <Property Name="IdOption" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdVehicule" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OptionV">
+          <Key>
+            <PropertyRef Name="IdOption" />
+          </Key>
+          <Property Name="IdOption" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeOption" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NomOption" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Descriptif" Type="varchar" MaxLength="510" Nullable="false" />
+          <Property Name="Prix" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ouvrier">
+          <Key>
+            <PropertyRef Name="CodeOuvrier" />
+          </Key>
+          <Property Name="CodeOuvrier" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Prenom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DateEntree" Type="datetime" Nullable="false" />
+          <Property Name="IdQualification" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PieceConsommable">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denomination" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PrixUnitaire" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="QuantiteTheorique" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="DateDernierReleve" Type="datetime" Nullable="false" />
+          <Property Name="QuantiteStockDernierReleve" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="Consommable" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CodeLieuStockage" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Possession">
+          <Key>
+            <PropertyRef Name="IdPossession" />
+          </Key>
+          <Property Name="IdPossession" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdVehicule" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NumMineralogique" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DateAchat" Type="datetime" Nullable="false" />
+          <Property Name="DateVendu" Type="datetime" />
+          <Property Name="DateImmatriculation" Type="datetime" Nullable="false" />
+          <Property Name="IdProprietaire" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proprietaire">
+          <Key>
+            <PropertyRef Name="IdProprietaire" />
+          </Key>
+          <Property Name="IdProprietaire" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumRegNational" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="NomProprio" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PrenomProprio" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Adresse" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CodeLangue" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="IdType" />
+          </Key>
+          <Property Name="IdType" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomTypeModele" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IdModele" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Cylindree" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Motorisation" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vehicule">
+          <Key>
+            <PropertyRef Name="IdVehicule" />
+          </Key>
+          <Property Name="IdVehicule" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumChassis" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="AnneeFabrication" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="TypeVehicule" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ChargeMax" Type="char" MaxLength="1" />
+          <Property Name="DateDernierControle" Type="datetime" />
+          <Property Name="IdType" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="CodeJante" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Visite">
+          <Key>
+            <PropertyRef Name="IdVisite" />
+          </Key>
+          <Property Name="IdVisite" Type="numeric" Precision="8" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateEntree" Type="datetime" Nullable="false" />
+          <Property Name="NumVisite" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="DateSortie" Type="datetime" Nullable="false" />
+          <Property Name="CoutFactureVisite" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Descriptif" Type="varchar" MaxLength="510" />
+          <Property Name="IdPossession" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="IdDevis" Type="numeric" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FKConcessionnaireMarque_FK">
+          <End Role="Marque" Type="Self.Marque" Multiplicity="1" />
+          <End Role="Concessionnaire" Type="Self.Concessionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marque">
+              <PropertyRef Name="IdMarque" />
+            </Principal>
+            <Dependent Role="Concessionnaire">
+              <PropertyRef Name="IdMarque" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDevisVehicule_FK">
+          <End Role="Possession" Type="Self.Possession" Multiplicity="1" />
+          <End Role="Devis" Type="Self.Devis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Possession">
+              <PropertyRef Name="IdPossession" />
+            </Principal>
+            <Dependent Role="Devis">
+              <PropertyRef Name="IdPossession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDevisVisite_FK">
+          <End Role="Devis" Type="Self.Devis" Multiplicity="1" />
+          <End Role="Visite" Type="Self.Visite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devis">
+              <PropertyRef Name="IdDevis" />
+            </Principal>
+            <Dependent Role="Visite">
+              <PropertyRef Name="IdDevis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKFactureVisite_FK">
+          <End Role="Visite" Type="Self.Visite" Multiplicity="1" />
+          <End Role="FactureDueNonPayee" Type="Self.FactureDueNonPayee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visite">
+              <PropertyRef Name="IdVisite" />
+            </Principal>
+            <Dependent Role="FactureDueNonPayee">
+              <PropertyRef Name="IdVisite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKJanteUtilise_FK">
+          <End Role="Jante" Type="Self.Jante" Multiplicity="1" />
+          <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jante">
+              <PropertyRef Name="CodeJante" />
+            </Principal>
+            <Dependent Role="Vehicule">
+              <PropertyRef Name="CodeJante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLan_Con">
+          <End Role="Concessionnaire" Type="Self.Concessionnaire" Multiplicity="1" />
+          <End Role="LangueConcessionnaire" Type="Self.LangueConcessionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Concessionnaire">
+              <PropertyRef Name="IdConcessionnaire" />
+            </Principal>
+            <Dependent Role="LangueConcessionnaire">
+              <PropertyRef Name="IdConcessionnaire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLan_Lan">
+          <End Role="Langue" Type="Self.Langue" Multiplicity="1" />
+          <End Role="LanguePiece" Type="Self.LanguePiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Langue">
+              <PropertyRef Name="CodeLangue" />
+            </Principal>
+            <Dependent Role="LanguePiece">
+              <PropertyRef Name="CodeLangue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLan_Lan_1_FK">
+          <End Role="Langue" Type="Self.Langue" Multiplicity="1" />
+          <End Role="LangueConcessionnaire" Type="Self.LangueConcessionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Langue">
+              <PropertyRef Name="CodeLangue" />
+            </Principal>
+            <Dependent Role="LangueConcessionnaire">
+              <PropertyRef Name="CodeLangue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLan_Pie_FK">
+          <End Role="PieceConsommable" Type="Self.PieceConsommable" Multiplicity="1" />
+          <End Role="LanguePiece" Type="Self.LanguePiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PieceConsommable">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="LanguePiece">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLangueProprio_FK">
+          <End Role="Langue" Type="Self.Langue" Multiplicity="1" />
+          <End Role="Proprietaire" Type="Self.Proprietaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Langue">
+              <PropertyRef Name="CodeLangue" />
+            </Principal>
+            <Dependent Role="Proprietaire">
+              <PropertyRef Name="CodeLangue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLieuS_FK">
+          <End Role="LieuStockage" Type="Self.LieuStockage" Multiplicity="1" />
+          <End Role="PieceConsommable" Type="Self.PieceConsommable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LieuStockage">
+              <PropertyRef Name="CodeLieuStockage" />
+            </Principal>
+            <Dependent Role="PieceConsommable">
+              <PropertyRef Name="CodeLieuStockage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLigneC_FK">
+          <End Role="Ligne" Type="Self.Ligne" Multiplicity="1" />
+          <End Role="LigneCommentaire" Type="Self.LigneCommentaire" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Ligne">
+              <PropertyRef Name="IdLigne" />
+            </Principal>
+            <Dependent Role="LigneCommentaire">
+              <PropertyRef Name="IdLigne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLigneDevis_FK">
+          <End Role="Devis" Type="Self.Devis" Multiplicity="1" />
+          <End Role="Ligne" Type="Self.Ligne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devis">
+              <PropertyRef Name="IdDevis" />
+            </Principal>
+            <Dependent Role="Ligne">
+              <PropertyRef Name="IdDevis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLigneO_FK">
+          <End Role="Ligne" Type="Self.Ligne" Multiplicity="1" />
+          <End Role="LigneOperation" Type="Self.LigneOperation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Ligne">
+              <PropertyRef Name="IdLigne" />
+            </Principal>
+            <Dependent Role="LigneOperation">
+              <PropertyRef Name="IdLigne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLigneP_FK">
+          <End Role="Ligne" Type="Self.Ligne" Multiplicity="1" />
+          <End Role="LignePiece" Type="Self.LignePiece" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Ligne">
+              <PropertyRef Name="IdLigne" />
+            </Principal>
+            <Dependent Role="LignePiece">
+              <PropertyRef Name="IdLigne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLis_Pie">
+          <End Role="PieceConsommable" Type="Self.PieceConsommable" Multiplicity="1" />
+          <End Role="ListePieceConsommable" Type="Self.ListePieceConsommable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PieceConsommable">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="ListePieceConsommable">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLis_Vis_FK">
+          <End Role="Visite" Type="Self.Visite" Multiplicity="1" />
+          <End Role="ListePieceConsommable" Type="Self.ListePieceConsommable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visite">
+              <PropertyRef Name="IdVisite" />
+            </Principal>
+            <Dependent Role="ListePieceConsommable">
+              <PropertyRef Name="IdVisite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMarqueModele_FK">
+          <End Role="Marque" Type="Self.Marque" Multiplicity="1" />
+          <End Role="Modele" Type="Self.Modele" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marque">
+              <PropertyRef Name="IdMarque" />
+            </Principal>
+            <Dependent Role="Modele">
+              <PropertyRef Name="IdMarque" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKModeleType">
+          <End Role="Modele" Type="Self.Modele" Multiplicity="1" />
+          <End Role="Type" Type="Self.Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modele">
+              <PropertyRef Name="IdModele" />
+            </Principal>
+            <Dependent Role="Type">
+              <PropertyRef Name="IdModele" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOpe_Ope_FK">
+          <End Role="Operation" Type="Self.Operation" Multiplicity="1" />
+          <End Role="OperationVisite" Type="Self.OperationVisite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="IdOperation" />
+            </Principal>
+            <Dependent Role="OperationVisite">
+              <PropertyRef Name="IdOperation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOpe_Vis">
+          <End Role="Visite" Type="Self.Visite" Multiplicity="1" />
+          <End Role="OperationVisite" Type="Self.OperationVisite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visite">
+              <PropertyRef Name="IdVisite" />
+            </Principal>
+            <Dependent Role="OperationVisite">
+              <PropertyRef Name="IdVisite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOperationLigne_FK">
+          <End Role="Operation" Type="Self.Operation" Multiplicity="1" />
+          <End Role="LigneOperation" Type="Self.LigneOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="IdOperation" />
+            </Principal>
+            <Dependent Role="LigneOperation">
+              <PropertyRef Name="IdOperation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOperationOuvrier_FK">
+          <End Role="Ouvrier" Type="Self.Ouvrier" Multiplicity="1" />
+          <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ouvrier">
+              <PropertyRef Name="CodeOuvrier" />
+            </Principal>
+            <Dependent Role="Operation">
+              <PropertyRef Name="CodeOuvrier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOpt_Opt">
+          <End Role="OptionV" Type="Self.OptionV" Multiplicity="1" />
+          <End Role="OptionNonStandard" Type="Self.OptionNonStandard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OptionV">
+              <PropertyRef Name="IdOption" />
+            </Principal>
+            <Dependent Role="OptionNonStandard">
+              <PropertyRef Name="IdOption" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOpt_Opt_1">
+          <End Role="OptionV" Type="Self.OptionV" Multiplicity="1" />
+          <End Role="OptionModele" Type="Self.OptionModele" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OptionV">
+              <PropertyRef Name="IdOption" />
+            </Principal>
+            <Dependent Role="OptionModele">
+              <PropertyRef Name="IdOption" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOpt_Typ_FK">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="OptionModele" Type="Self.OptionModele" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="IdType" />
+            </Principal>
+            <Dependent Role="OptionModele">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOpt_Veh_FK">
+          <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="1" />
+          <End Role="OptionNonStandard" Type="Self.OptionNonStandard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicule">
+              <PropertyRef Name="IdVehicule" />
+            </Principal>
+            <Dependent Role="OptionNonStandard">
+              <PropertyRef Name="IdVehicule" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOuvrierQualification_FK">
+          <End Role="DegreQualification" Type="Self.DegreQualification" Multiplicity="1" />
+          <End Role="Ouvrier" Type="Self.Ouvrier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DegreQualification">
+              <PropertyRef Name="IdQualification" />
+            </Principal>
+            <Dependent Role="Ouvrier">
+              <PropertyRef Name="IdQualification" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPieceC_FK">
+          <End Role="PieceConsommable" Type="Self.PieceConsommable" Multiplicity="1" />
+          <End Role="LignePiece" Type="Self.LignePiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PieceConsommable">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="LignePiece">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProprietaireVehicule_FK">
+          <End Role="Proprietaire" Type="Self.Proprietaire" Multiplicity="1" />
+          <End Role="Possession" Type="Self.Possession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proprietaire">
+              <PropertyRef Name="IdProprietaire" />
+            </Principal>
+            <Dependent Role="Possession">
+              <PropertyRef Name="IdProprietaire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTelOuvrier_FK">
+          <End Role="Ouvrier" Type="Self.Ouvrier" Multiplicity="1" />
+          <End Role="NumTelOuvrier" Type="Self.NumTelOuvrier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ouvrier">
+              <PropertyRef Name="CodeOuvrier" />
+            </Principal>
+            <Dependent Role="NumTelOuvrier">
+              <PropertyRef Name="CodeOuvrier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTelProprio_FK">
+          <End Role="Proprietaire" Type="Self.Proprietaire" Multiplicity="1" />
+          <End Role="NumTelProprio" Type="Self.NumTelProprio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proprietaire">
+              <PropertyRef Name="IdProprietaire" />
+            </Principal>
+            <Dependent Role="NumTelProprio">
+              <PropertyRef Name="IdProprietaire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTypeModeleVehicule_FK">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="IdType" />
+            </Principal>
+            <Dependent Role="Vehicule">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKVehiculePossede_FK">
+          <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="1" />
+          <End Role="Possession" Type="Self.Possession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicule">
+              <PropertyRef Name="IdVehicule" />
+            </Principal>
+            <Dependent Role="Possession">
+              <PropertyRef Name="IdVehicule" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKVisiteVehicule_FK">
+          <End Role="Possession" Type="Self.Possession" Multiplicity="1" />
+          <End Role="Visite" Type="Self.Visite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Possession">
+              <PropertyRef Name="IdPossession" />
+            </Principal>
+            <Dependent Role="Visite">
+              <PropertyRef Name="IdPossession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MarqueOpenModelStoreContainer">
+          <EntitySet Name="Concessionnaire" EntityType="Self.Concessionnaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DegreQualification" EntityType="Self.DegreQualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Devis" EntityType="Self.Devis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FactureDueNonPayee" EntityType="Self.FactureDueNonPayee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jante" EntityType="Self.Jante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Langue" EntityType="Self.Langue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LangueConcessionnaire" EntityType="Self.LangueConcessionnaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LanguePiece" EntityType="Self.LanguePiece" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LieuStockage" EntityType="Self.LieuStockage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ligne" EntityType="Self.Ligne" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LigneCommentaire" EntityType="Self.LigneCommentaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LigneOperation" EntityType="Self.LigneOperation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LignePiece" EntityType="Self.LignePiece" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListePieceConsommable" EntityType="Self.ListePieceConsommable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marque" EntityType="Self.Marque" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modele" EntityType="Self.Modele" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NumTelOuvrier" EntityType="Self.NumTelOuvrier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NumTelProprio" EntityType="Self.NumTelProprio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Operation" EntityType="Self.Operation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OperationVisite" EntityType="Self.OperationVisite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OptionModele" EntityType="Self.OptionModele" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OptionNonStandard" EntityType="Self.OptionNonStandard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OptionV" EntityType="Self.OptionV" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ouvrier" EntityType="Self.Ouvrier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PieceConsommable" EntityType="Self.PieceConsommable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Possession" EntityType="Self.Possession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proprietaire" EntityType="Self.Proprietaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehicule" EntityType="Self.Vehicule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visite" EntityType="Self.Visite" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FKConcessionnaireMarque_FK" Association="Self.FKConcessionnaireMarque_FK">
+            <End Role="Marque" EntitySet="Marque" />
+            <End Role="Concessionnaire" EntitySet="Concessionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FKDevisVehicule_FK" Association="Self.FKDevisVehicule_FK">
+            <End Role="Possession" EntitySet="Possession" />
+            <End Role="Devis" EntitySet="Devis" />
+          </AssociationSet>
+          <AssociationSet Name="FKDevisVisite_FK" Association="Self.FKDevisVisite_FK">
+            <End Role="Devis" EntitySet="Devis" />
+            <End Role="Visite" EntitySet="Visite" />
+          </AssociationSet>
+          <AssociationSet Name="FKFactureVisite_FK" Association="Self.FKFactureVisite_FK">
+            <End Role="Visite" EntitySet="Visite" />
+            <End Role="FactureDueNonPayee" EntitySet="FactureDueNonPayee" />
+          </AssociationSet>
+          <AssociationSet Name="FKJanteUtilise_FK" Association="Self.FKJanteUtilise_FK">
+            <End Role="Jante" EntitySet="Jante" />
+            <End Role="Vehicule" EntitySet="Vehicule" />
+          </AssociationSet>
+          <AssociationSet Name="FKLan_Con" Association="Self.FKLan_Con">
+            <End Role="Concessionnaire" EntitySet="Concessionnaire" />
+            <End Role="LangueConcessionnaire" EntitySet="LangueConcessionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FKLan_Lan" Association="Self.FKLan_Lan">
+            <End Role="Langue" EntitySet="Langue" />
+            <End Role="LanguePiece" EntitySet="LanguePiece" />
+          </AssociationSet>
+          <AssociationSet Name="FKLan_Lan_1_FK" Association="Self.FKLan_Lan_1_FK">
+            <End Role="Langue" EntitySet="Langue" />
+            <End Role="LangueConcessionnaire" EntitySet="LangueConcessionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FKLan_Pie_FK" Association="Self.FKLan_Pie_FK">
+            <End Role="PieceConsommable" EntitySet="PieceConsommable" />
+            <End Role="LanguePiece" EntitySet="LanguePiece" />
+          </AssociationSet>
+          <AssociationSet Name="FKLangueProprio_FK" Association="Self.FKLangueProprio_FK">
+            <End Role="Langue" EntitySet="Langue" />
+            <End Role="Proprietaire" EntitySet="Proprietaire" />
+          </AssociationSet>
+          <AssociationSet Name="FKLieuS_FK" Association="Self.FKLieuS_FK">
+            <End Role="LieuStockage" EntitySet="LieuStockage" />
+            <End Role="PieceConsommable" EntitySet="PieceConsommable" />
+          </AssociationSet>
+          <AssociationSet Name="FKLigneC_FK" Association="Self.FKLigneC_FK">
+            <End Role="Ligne" EntitySet="Ligne" />
+            <End Role="LigneCommentaire" EntitySet="LigneCommentaire" />
+          </AssociationSet>
+          <AssociationSet Name="FKLigneDevis_FK" Association="Self.FKLigneDevis_FK">
+            <End Role="Devis" EntitySet="Devis" />
+            <End Role="Ligne" EntitySet="Ligne" />
+          </AssociationSet>
+          <AssociationSet Name="FKLigneO_FK" Association="Self.FKLigneO_FK">
+            <End Role="Ligne" EntitySet="Ligne" />
+            <End Role="LigneOperation" EntitySet="LigneOperation" />
+          </AssociationSet>
+          <AssociationSet Name="FKLigneP_FK" Association="Self.FKLigneP_FK">
+            <End Role="Ligne" EntitySet="Ligne" />
+            <End Role="LignePiece" EntitySet="LignePiece" />
+          </AssociationSet>
+          <AssociationSet Name="FKLis_Pie" Association="Self.FKLis_Pie">
+            <End Role="PieceConsommable" EntitySet="PieceConsommable" />
+            <End Role="ListePieceConsommable" EntitySet="ListePieceConsommable" />
+          </AssociationSet>
+          <AssociationSet Name="FKLis_Vis_FK" Association="Self.FKLis_Vis_FK">
+            <End Role="Visite" EntitySet="Visite" />
+            <End Role="ListePieceConsommable" EntitySet="ListePieceConsommable" />
+          </AssociationSet>
+          <AssociationSet Name="FKMarqueModele_FK" Association="Self.FKMarqueModele_FK">
+            <End Role="Marque" EntitySet="Marque" />
+            <End Role="Modele" EntitySet="Modele" />
+          </AssociationSet>
+          <AssociationSet Name="FKModeleType" Association="Self.FKModeleType">
+            <End Role="Modele" EntitySet="Modele" />
+            <End Role="Type" EntitySet="Type" />
+          </AssociationSet>
+          <AssociationSet Name="FKOpe_Ope_FK" Association="Self.FKOpe_Ope_FK">
+            <End Role="Operation" EntitySet="Operation" />
+            <End Role="OperationVisite" EntitySet="OperationVisite" />
+          </AssociationSet>
+          <AssociationSet Name="FKOpe_Vis" Association="Self.FKOpe_Vis">
+            <End Role="Visite" EntitySet="Visite" />
+            <End Role="OperationVisite" EntitySet="OperationVisite" />
+          </AssociationSet>
+          <AssociationSet Name="FKOperationLigne_FK" Association="Self.FKOperationLigne_FK">
+            <End Role="Operation" EntitySet="Operation" />
+            <End Role="LigneOperation" EntitySet="LigneOperation" />
+          </AssociationSet>
+          <AssociationSet Name="FKOperationOuvrier_FK" Association="Self.FKOperationOuvrier_FK">
+            <End Role="Ouvrier" EntitySet="Ouvrier" />
+            <End Role="Operation" EntitySet="Operation" />
+          </AssociationSet>
+          <AssociationSet Name="FKOpt_Opt" Association="Self.FKOpt_Opt">
+            <End Role="OptionV" EntitySet="OptionV" />
+            <End Role="OptionNonStandard" EntitySet="OptionNonStandard" />
+          </AssociationSet>
+          <AssociationSet Name="FKOpt_Opt_1" Association="Self.FKOpt_Opt_1">
+            <End Role="OptionV" EntitySet="OptionV" />
+            <End Role="OptionModele" EntitySet="OptionModele" />
+          </AssociationSet>
+          <AssociationSet Name="FKOpt_Typ_FK" Association="Self.FKOpt_Typ_FK">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="OptionModele" EntitySet="OptionModele" />
+          </AssociationSet>
+          <AssociationSet Name="FKOpt_Veh_FK" Association="Self.FKOpt_Veh_FK">
+            <End Role="Vehicule" EntitySet="Vehicule" />
+            <End Role="OptionNonStandard" EntitySet="OptionNonStandard" />
+          </AssociationSet>
+          <AssociationSet Name="FKOuvrierQualification_FK" Association="Self.FKOuvrierQualification_FK">
+            <End Role="DegreQualification" EntitySet="DegreQualification" />
+            <End Role="Ouvrier" EntitySet="Ouvrier" />
+          </AssociationSet>
+          <AssociationSet Name="FKPieceC_FK" Association="Self.FKPieceC_FK">
+            <End Role="PieceConsommable" EntitySet="PieceConsommable" />
+            <End Role="LignePiece" EntitySet="LignePiece" />
+          </AssociationSet>
+          <AssociationSet Name="FKProprietaireVehicule_FK" Association="Self.FKProprietaireVehicule_FK">
+            <End Role="Proprietaire" EntitySet="Proprietaire" />
+            <End Role="Possession" EntitySet="Possession" />
+          </AssociationSet>
+          <AssociationSet Name="FKTelOuvrier_FK" Association="Self.FKTelOuvrier_FK">
+            <End Role="Ouvrier" EntitySet="Ouvrier" />
+            <End Role="NumTelOuvrier" EntitySet="NumTelOuvrier" />
+          </AssociationSet>
+          <AssociationSet Name="FKTelProprio_FK" Association="Self.FKTelProprio_FK">
+            <End Role="Proprietaire" EntitySet="Proprietaire" />
+            <End Role="NumTelProprio" EntitySet="NumTelProprio" />
+          </AssociationSet>
+          <AssociationSet Name="FKTypeModeleVehicule_FK" Association="Self.FKTypeModeleVehicule_FK">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Vehicule" EntitySet="Vehicule" />
+          </AssociationSet>
+          <AssociationSet Name="FKVehiculePossede_FK" Association="Self.FKVehiculePossede_FK">
+            <End Role="Vehicule" EntitySet="Vehicule" />
+            <End Role="Possession" EntitySet="Possession" />
+          </AssociationSet>
+          <AssociationSet Name="FKVisiteVehicule_FK" Association="Self.FKVisiteVehicule_FK">
+            <End Role="Possession" EntitySet="Possession" />
+            <End Role="Visite" EntitySet="Visite" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MarqueOpenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Concessionnaire">
+          <Key>
+            <PropertyRef Name="IdConcessionnaire" />
+          </Key>
+          <Property Name="IdConcessionnaire" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomConcessionnaire" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adr_Rue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adr_Numero" Type="Decimal" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="IdMarque" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Marque" Relationship="Self.FKConcessionnaireMarque_FK" FromRole="Concessionnaire" ToRole="Marque" />
+          <NavigationProperty Name="Langue" Relationship="Self.LangueConcessionnaire" FromRole="Concessionnaire" ToRole="Langue" />
+        </EntityType>
+        <EntityType Name="DegreQualification">
+          <Key>
+            <PropertyRef Name="IdQualification" />
+          </Key>
+          <Property Name="IdQualification" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Degre" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Ouvrier" Relationship="Self.FKOuvrierQualification_FK" FromRole="DegreQualification" ToRole="Ouvrier" />
+        </EntityType>
+        <EntityType Name="Devis">
+          <Key>
+            <PropertyRef Name="IdDevis" />
+          </Key>
+          <Property Name="IdDevis" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumDevis" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Descriptif" Type="String" MaxLength="510" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdPossession" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Possession" Relationship="Self.FKDevisVehicule_FK" FromRole="Devis" ToRole="Possession" />
+          <NavigationProperty Name="Visite" Relationship="Self.FKDevisVisite_FK" FromRole="Devis" ToRole="Visite" />
+          <NavigationProperty Name="Ligne" Relationship="Self.FKLigneDevis_FK" FromRole="Devis" ToRole="Ligne" />
+        </EntityType>
+        <EntityType Name="FactureDueNonPayee">
+          <Key>
+            <PropertyRef Name="IdFactureDueNonPaye" />
+          </Key>
+          <Property Name="IdFactureDueNonPaye" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdVisite" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Montant" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="DateEcheance" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MontantEnAccompte" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Descriptif" Type="String" MaxLength="510" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Visite" Relationship="Self.FKFactureVisite_FK" FromRole="FactureDueNonPayee" ToRole="Visite" />
+        </EntityType>
+        <EntityType Name="Jante">
+          <Key>
+            <PropertyRef Name="CodeJante" />
+          </Key>
+          <Property Name="CodeJante" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pouce" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Vehicule" Relationship="Self.FKJanteUtilise_FK" FromRole="Jante" ToRole="Vehicule" />
+        </EntityType>
+        <EntityType Name="Langue">
+          <Key>
+            <PropertyRef Name="CodeLangue" />
+          </Key>
+          <Property Name="CodeLangue" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LibelleLangue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LanguePiece" Relationship="Self.FKLan_Lan" FromRole="Langue" ToRole="LanguePiece" />
+          <NavigationProperty Name="Proprietaire" Relationship="Self.FKLangueProprio_FK" FromRole="Langue" ToRole="Proprietaire" />
+          <NavigationProperty Name="Concessionnaire" Relationship="Self.LangueConcessionnaire" FromRole="Langue" ToRole="Concessionnaire" />
+        </EntityType>
+        <EntityType Name="LanguePiece">
+          <Key>
+            <PropertyRef Name="CodeLangue" />
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="CodeLangue" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="TraductionPiece" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Langue" Relationship="Self.FKLan_Lan" FromRole="LanguePiece" ToRole="Langue" />
+          <NavigationProperty Name="PieceConsommable" Relationship="Self.FKLan_Pie_FK" FromRole="LanguePiece" ToRole="PieceConsommable" />
+        </EntityType>
+        <EntityType Name="LieuStockage">
+          <Key>
+            <PropertyRef Name="CodeLieuStockage" />
+          </Key>
+          <Property Name="CodeLieuStockage" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adresse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PieceConsommable" Relationship="Self.FKLieuS_FK" FromRole="LieuStockage" ToRole="PieceConsommable" />
+        </EntityType>
+        <EntityType Name="Ligne">
+          <Key>
+            <PropertyRef Name="IdLigne" />
+          </Key>
+          <Property Name="IdLigne" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroLigne" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="TypeLigne" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IdDevis" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Devis" Relationship="Self.FKLigneDevis_FK" FromRole="Ligne" ToRole="Devis" />
+          <NavigationProperty Name="LigneCommentaire" Relationship="Self.FKLigneC_FK" FromRole="Ligne" ToRole="LigneCommentaire" />
+          <NavigationProperty Name="LigneOperation" Relationship="Self.FKLigneO_FK" FromRole="Ligne" ToRole="LigneOperation" />
+          <NavigationProperty Name="LignePiece" Relationship="Self.FKLigneP_FK" FromRole="Ligne" ToRole="LignePiece" />
+        </EntityType>
+        <EntityType Name="LigneCommentaire">
+          <Key>
+            <PropertyRef Name="IdLigne" />
+          </Key>
+          <Property Name="IdLigne" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Texte" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Ligne" Relationship="Self.FKLigneC_FK" FromRole="LigneCommentaire" ToRole="Ligne" />
+        </EntityType>
+        <EntityType Name="LigneOperation">
+          <Key>
+            <PropertyRef Name="IdLigne" />
+          </Key>
+          <Property Name="IdLigne" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Temps" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="CoutHoraire" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="IdOperation" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Ligne" Relationship="Self.FKLigneO_FK" FromRole="LigneOperation" ToRole="Ligne" />
+          <NavigationProperty Name="Operation" Relationship="Self.FKOperationLigne_FK" FromRole="LigneOperation" ToRole="Operation" />
+        </EntityType>
+        <EntityType Name="LignePiece">
+          <Key>
+            <PropertyRef Name="IdLigne" />
+          </Key>
+          <Property Name="IdLigne" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Prix" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Quantite" Type="Decimal" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="Code" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Ligne" Relationship="Self.FKLigneP_FK" FromRole="LignePiece" ToRole="Ligne" />
+          <NavigationProperty Name="PieceConsommable" Relationship="Self.FKPieceC_FK" FromRole="LignePiece" ToRole="PieceConsommable" />
+        </EntityType>
+        <EntityType Name="ListePieceConsommable">
+          <Key>
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="IdVisite" />
+          </Key>
+          <Property Name="Code" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdVisite" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Quantite" Type="Decimal" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="Prix" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <NavigationProperty Name="PieceConsommable" Relationship="Self.FKLis_Pie" FromRole="ListePieceConsommable" ToRole="PieceConsommable" />
+          <NavigationProperty Name="Visite" Relationship="Self.FKLis_Vis_FK" FromRole="ListePieceConsommable" ToRole="Visite" />
+        </EntityType>
+        <EntityType Name="Marque">
+          <Key>
+            <PropertyRef Name="IdMarque" />
+          </Key>
+          <Property Name="IdMarque" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomMarque" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateCreation" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Concessionnaire" Relationship="Self.FKConcessionnaireMarque_FK" FromRole="Marque" ToRole="Concessionnaire" />
+          <NavigationProperty Name="Modele" Relationship="Self.FKMarqueModele_FK" FromRole="Marque" ToRole="Modele" />
+        </EntityType>
+        <EntityType Name="Modele">
+          <Key>
+            <PropertyRef Name="IdModele" />
+          </Key>
+          <Property Name="IdModele" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomModele" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdMarque" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Descriptif" Type="String" MaxLength="510" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Marque" Relationship="Self.FKMarqueModele_FK" FromRole="Modele" ToRole="Marque" />
+          <NavigationProperty Name="Type" Relationship="Self.FKModeleType" FromRole="Modele" ToRole="Type" />
+        </EntityType>
+        <EntityType Name="NumTelOuvrier">
+          <Key>
+            <PropertyRef Name="IdNumTelOuvrier" />
+          </Key>
+          <Property Name="IdNumTelOuvrier" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumTelOuvrier1" Type="Decimal" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="CodeOuvrier" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Ouvrier" Relationship="Self.FKTelOuvrier_FK" FromRole="NumTelOuvrier" ToRole="Ouvrier" />
+        </EntityType>
+        <EntityType Name="NumTelProprio">
+          <Key>
+            <PropertyRef Name="IdNumTelProprio" />
+          </Key>
+          <Property Name="IdNumTelProprio" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumTelProprio1" Type="Decimal" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="IdProprietaire" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Proprietaire" Relationship="Self.FKTelProprio_FK" FromRole="NumTelProprio" ToRole="Proprietaire" />
+        </EntityType>
+        <EntityType Name="Operation">
+          <Key>
+            <PropertyRef Name="IdOperation" />
+          </Key>
+          <Property Name="IdOperation" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodeOperation" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Descriptif" Type="String" MaxLength="510" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DureeHabituelle" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="PrixUnitaire" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="CodeOuvrier" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="LigneOperation" Relationship="Self.FKOperationLigne_FK" FromRole="Operation" ToRole="LigneOperation" />
+          <NavigationProperty Name="OperationVisite" Relationship="Self.FKOpe_Ope_FK" FromRole="Operation" ToRole="OperationVisite" />
+          <NavigationProperty Name="Ouvrier" Relationship="Self.FKOperationOuvrier_FK" FromRole="Operation" ToRole="Ouvrier" />
+        </EntityType>
+        <EntityType Name="OperationVisite">
+          <Key>
+            <PropertyRef Name="IdOperation" />
+            <PropertyRef Name="IdVisite" />
+          </Key>
+          <Property Name="IdOperation" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdVisite" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="DureeEffective" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="Prix" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Operation" Relationship="Self.FKOpe_Ope_FK" FromRole="OperationVisite" ToRole="Operation" />
+          <NavigationProperty Name="Visite" Relationship="Self.FKOpe_Vis" FromRole="OperationVisite" ToRole="Visite" />
+        </EntityType>
+        <EntityType Name="OptionV">
+          <Key>
+            <PropertyRef Name="IdOption" />
+          </Key>
+          <Property Name="IdOption" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodeOption" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NomOption" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descriptif" Type="String" MaxLength="510" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prix" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Type" Relationship="Self.OptionModele" FromRole="OptionV" ToRole="Type" />
+          <NavigationProperty Name="Vehicule" Relationship="Self.OptionNonStandard" FromRole="OptionV" ToRole="Vehicule" />
+        </EntityType>
+        <EntityType Name="Ouvrier">
+          <Key>
+            <PropertyRef Name="CodeOuvrier" />
+          </Key>
+          <Property Name="CodeOuvrier" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateEntree" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdQualification" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="DegreQualification" Relationship="Self.FKOuvrierQualification_FK" FromRole="Ouvrier" ToRole="DegreQualification" />
+          <NavigationProperty Name="NumTelOuvrier" Relationship="Self.FKTelOuvrier_FK" FromRole="Ouvrier" ToRole="NumTelOuvrier" />
+          <NavigationProperty Name="Operation" Relationship="Self.FKOperationOuvrier_FK" FromRole="Ouvrier" ToRole="Operation" />
+        </EntityType>
+        <EntityType Name="PieceConsommable">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denomination" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrixUnitaire" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="QuantiteTheorique" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="DateDernierReleve" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QuantiteStockDernierReleve" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="Consommable" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CodeLieuStockage" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="LanguePiece" Relationship="Self.FKLan_Pie_FK" FromRole="PieceConsommable" ToRole="LanguePiece" />
+          <NavigationProperty Name="LieuStockage" Relationship="Self.FKLieuS_FK" FromRole="PieceConsommable" ToRole="LieuStockage" />
+          <NavigationProperty Name="LignePiece" Relationship="Self.FKPieceC_FK" FromRole="PieceConsommable" ToRole="LignePiece" />
+          <NavigationProperty Name="ListePieceConsommable" Relationship="Self.FKLis_Pie" FromRole="PieceConsommable" ToRole="ListePieceConsommable" />
+        </EntityType>
+        <EntityType Name="Possession">
+          <Key>
+            <PropertyRef Name="IdPossession" />
+          </Key>
+          <Property Name="IdPossession" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdVehicule" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NumMineralogique" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateAchat" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateVendu" Type="DateTime" Precision="3" />
+          <Property Name="DateImmatriculation" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdProprietaire" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Devis" Relationship="Self.FKDevisVehicule_FK" FromRole="Possession" ToRole="Devis" />
+          <NavigationProperty Name="Proprietaire" Relationship="Self.FKProprietaireVehicule_FK" FromRole="Possession" ToRole="Proprietaire" />
+          <NavigationProperty Name="Vehicule" Relationship="Self.FKVehiculePossede_FK" FromRole="Possession" ToRole="Vehicule" />
+          <NavigationProperty Name="Visite" Relationship="Self.FKVisiteVehicule_FK" FromRole="Possession" ToRole="Visite" />
+        </EntityType>
+        <EntityType Name="Proprietaire">
+          <Key>
+            <PropertyRef Name="IdProprietaire" />
+          </Key>
+          <Property Name="IdProprietaire" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumRegNational" Type="Decimal" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="NomProprio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrenomProprio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodeLangue" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Langue" Relationship="Self.FKLangueProprio_FK" FromRole="Proprietaire" ToRole="Langue" />
+          <NavigationProperty Name="NumTelProprio" Relationship="Self.FKTelProprio_FK" FromRole="Proprietaire" ToRole="NumTelProprio" />
+          <NavigationProperty Name="Possession" Relationship="Self.FKProprietaireVehicule_FK" FromRole="Proprietaire" ToRole="Possession" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="IdType" />
+          </Key>
+          <Property Name="IdType" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomTypeModele" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdModele" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="Cylindree" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Motorisation" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Modele" Relationship="Self.FKModeleType" FromRole="Type" ToRole="Modele" />
+          <NavigationProperty Name="Vehicule" Relationship="Self.FKTypeModeleVehicule_FK" FromRole="Type" ToRole="Vehicule" />
+          <NavigationProperty Name="OptionV" Relationship="Self.OptionModele" FromRole="Type" ToRole="OptionV" />
+        </EntityType>
+        <EntityType Name="Vehicule">
+          <Key>
+            <PropertyRef Name="IdVehicule" />
+          </Key>
+          <Property Name="IdVehicule" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumChassis" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="AnneeFabrication" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="TypeVehicule" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChargeMax" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DateDernierControle" Type="DateTime" Precision="3" />
+          <Property Name="IdType" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="CodeJante" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Jante" Relationship="Self.FKJanteUtilise_FK" FromRole="Vehicule" ToRole="Jante" />
+          <NavigationProperty Name="Possession" Relationship="Self.FKVehiculePossede_FK" FromRole="Vehicule" ToRole="Possession" />
+          <NavigationProperty Name="Type" Relationship="Self.FKTypeModeleVehicule_FK" FromRole="Vehicule" ToRole="Type" />
+          <NavigationProperty Name="OptionV" Relationship="Self.OptionNonStandard" FromRole="Vehicule" ToRole="OptionV" />
+        </EntityType>
+        <EntityType Name="Visite">
+          <Key>
+            <PropertyRef Name="IdVisite" />
+          </Key>
+          <Property Name="IdVisite" Type="Decimal" Precision="8" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateEntree" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NumVisite" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="DateSortie" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CoutFactureVisite" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Descriptif" Type="String" MaxLength="510" FixedLength="false" Unicode="false" />
+          <Property Name="IdPossession" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="IdDevis" Type="Decimal" Precision="8" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Devis" Relationship="Self.FKDevisVisite_FK" FromRole="Visite" ToRole="Devis" />
+          <NavigationProperty Name="FactureDueNonPayee" Relationship="Self.FKFactureVisite_FK" FromRole="Visite" ToRole="FactureDueNonPayee" />
+          <NavigationProperty Name="ListePieceConsommable" Relationship="Self.FKLis_Vis_FK" FromRole="Visite" ToRole="ListePieceConsommable" />
+          <NavigationProperty Name="OperationVisite" Relationship="Self.FKOpe_Vis" FromRole="Visite" ToRole="OperationVisite" />
+          <NavigationProperty Name="Possession" Relationship="Self.FKVisiteVehicule_FK" FromRole="Visite" ToRole="Possession" />
+        </EntityType>
+        <Association Name="FKConcessionnaireMarque_FK">
+          <End Role="Marque" Type="Self.Marque" Multiplicity="1" />
+          <End Role="Concessionnaire" Type="Self.Concessionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marque">
+              <PropertyRef Name="IdMarque" />
+            </Principal>
+            <Dependent Role="Concessionnaire">
+              <PropertyRef Name="IdMarque" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOuvrierQualification_FK">
+          <End Role="DegreQualification" Type="Self.DegreQualification" Multiplicity="1" />
+          <End Role="Ouvrier" Type="Self.Ouvrier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DegreQualification">
+              <PropertyRef Name="IdQualification" />
+            </Principal>
+            <Dependent Role="Ouvrier">
+              <PropertyRef Name="IdQualification" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDevisVehicule_FK">
+          <End Role="Possession" Type="Self.Possession" Multiplicity="1" />
+          <End Role="Devis" Type="Self.Devis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Possession">
+              <PropertyRef Name="IdPossession" />
+            </Principal>
+            <Dependent Role="Devis">
+              <PropertyRef Name="IdPossession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDevisVisite_FK">
+          <End Role="Devis" Type="Self.Devis" Multiplicity="1" />
+          <End Role="Visite" Type="Self.Visite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devis">
+              <PropertyRef Name="IdDevis" />
+            </Principal>
+            <Dependent Role="Visite">
+              <PropertyRef Name="IdDevis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLigneDevis_FK">
+          <End Role="Devis" Type="Self.Devis" Multiplicity="1" />
+          <End Role="Ligne" Type="Self.Ligne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devis">
+              <PropertyRef Name="IdDevis" />
+            </Principal>
+            <Dependent Role="Ligne">
+              <PropertyRef Name="IdDevis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKFactureVisite_FK">
+          <End Role="Visite" Type="Self.Visite" Multiplicity="1" />
+          <End Role="FactureDueNonPayee" Type="Self.FactureDueNonPayee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visite">
+              <PropertyRef Name="IdVisite" />
+            </Principal>
+            <Dependent Role="FactureDueNonPayee">
+              <PropertyRef Name="IdVisite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKJanteUtilise_FK">
+          <End Role="Jante" Type="Self.Jante" Multiplicity="1" />
+          <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jante">
+              <PropertyRef Name="CodeJante" />
+            </Principal>
+            <Dependent Role="Vehicule">
+              <PropertyRef Name="CodeJante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLan_Lan">
+          <End Role="Langue" Type="Self.Langue" Multiplicity="1" />
+          <End Role="LanguePiece" Type="Self.LanguePiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Langue">
+              <PropertyRef Name="CodeLangue" />
+            </Principal>
+            <Dependent Role="LanguePiece">
+              <PropertyRef Name="CodeLangue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLangueProprio_FK">
+          <End Role="Langue" Type="Self.Langue" Multiplicity="1" />
+          <End Role="Proprietaire" Type="Self.Proprietaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Langue">
+              <PropertyRef Name="CodeLangue" />
+            </Principal>
+            <Dependent Role="Proprietaire">
+              <PropertyRef Name="CodeLangue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLan_Pie_FK">
+          <End Role="PieceConsommable" Type="Self.PieceConsommable" Multiplicity="1" />
+          <End Role="LanguePiece" Type="Self.LanguePiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PieceConsommable">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="LanguePiece">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLieuS_FK">
+          <End Role="LieuStockage" Type="Self.LieuStockage" Multiplicity="1" />
+          <End Role="PieceConsommable" Type="Self.PieceConsommable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LieuStockage">
+              <PropertyRef Name="CodeLieuStockage" />
+            </Principal>
+            <Dependent Role="PieceConsommable">
+              <PropertyRef Name="CodeLieuStockage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLigneC_FK">
+          <End Role="Ligne" Type="Self.Ligne" Multiplicity="1" />
+          <End Role="LigneCommentaire" Type="Self.LigneCommentaire" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Ligne">
+              <PropertyRef Name="IdLigne" />
+            </Principal>
+            <Dependent Role="LigneCommentaire">
+              <PropertyRef Name="IdLigne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLigneO_FK">
+          <End Role="Ligne" Type="Self.Ligne" Multiplicity="1" />
+          <End Role="LigneOperation" Type="Self.LigneOperation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Ligne">
+              <PropertyRef Name="IdLigne" />
+            </Principal>
+            <Dependent Role="LigneOperation">
+              <PropertyRef Name="IdLigne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLigneP_FK">
+          <End Role="Ligne" Type="Self.Ligne" Multiplicity="1" />
+          <End Role="LignePiece" Type="Self.LignePiece" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Ligne">
+              <PropertyRef Name="IdLigne" />
+            </Principal>
+            <Dependent Role="LignePiece">
+              <PropertyRef Name="IdLigne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOperationLigne_FK">
+          <End Role="Operation" Type="Self.Operation" Multiplicity="1" />
+          <End Role="LigneOperation" Type="Self.LigneOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="IdOperation" />
+            </Principal>
+            <Dependent Role="LigneOperation">
+              <PropertyRef Name="IdOperation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPieceC_FK">
+          <End Role="PieceConsommable" Type="Self.PieceConsommable" Multiplicity="1" />
+          <End Role="LignePiece" Type="Self.LignePiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PieceConsommable">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="LignePiece">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLis_Pie">
+          <End Role="PieceConsommable" Type="Self.PieceConsommable" Multiplicity="1" />
+          <End Role="ListePieceConsommable" Type="Self.ListePieceConsommable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PieceConsommable">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="ListePieceConsommable">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLis_Vis_FK">
+          <End Role="Visite" Type="Self.Visite" Multiplicity="1" />
+          <End Role="ListePieceConsommable" Type="Self.ListePieceConsommable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visite">
+              <PropertyRef Name="IdVisite" />
+            </Principal>
+            <Dependent Role="ListePieceConsommable">
+              <PropertyRef Name="IdVisite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMarqueModele_FK">
+          <End Role="Marque" Type="Self.Marque" Multiplicity="1" />
+          <End Role="Modele" Type="Self.Modele" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marque">
+              <PropertyRef Name="IdMarque" />
+            </Principal>
+            <Dependent Role="Modele">
+              <PropertyRef Name="IdMarque" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKModeleType">
+          <End Role="Modele" Type="Self.Modele" Multiplicity="1" />
+          <End Role="Type" Type="Self.Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modele">
+              <PropertyRef Name="IdModele" />
+            </Principal>
+            <Dependent Role="Type">
+              <PropertyRef Name="IdModele" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTelOuvrier_FK">
+          <End Role="Ouvrier" Type="Self.Ouvrier" Multiplicity="1" />
+          <End Role="NumTelOuvrier" Type="Self.NumTelOuvrier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ouvrier">
+              <PropertyRef Name="CodeOuvrier" />
+            </Principal>
+            <Dependent Role="NumTelOuvrier">
+              <PropertyRef Name="CodeOuvrier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTelProprio_FK">
+          <End Role="Proprietaire" Type="Self.Proprietaire" Multiplicity="1" />
+          <End Role="NumTelProprio" Type="Self.NumTelProprio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proprietaire">
+              <PropertyRef Name="IdProprietaire" />
+            </Principal>
+            <Dependent Role="NumTelProprio">
+              <PropertyRef Name="IdProprietaire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOpe_Ope_FK">
+          <End Role="Operation" Type="Self.Operation" Multiplicity="1" />
+          <End Role="OperationVisite" Type="Self.OperationVisite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="IdOperation" />
+            </Principal>
+            <Dependent Role="OperationVisite">
+              <PropertyRef Name="IdOperation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOperationOuvrier_FK">
+          <End Role="Ouvrier" Type="Self.Ouvrier" Multiplicity="1" />
+          <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ouvrier">
+              <PropertyRef Name="CodeOuvrier" />
+            </Principal>
+            <Dependent Role="Operation">
+              <PropertyRef Name="CodeOuvrier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOpe_Vis">
+          <End Role="Visite" Type="Self.Visite" Multiplicity="1" />
+          <End Role="OperationVisite" Type="Self.OperationVisite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visite">
+              <PropertyRef Name="IdVisite" />
+            </Principal>
+            <Dependent Role="OperationVisite">
+              <PropertyRef Name="IdVisite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProprietaireVehicule_FK">
+          <End Role="Proprietaire" Type="Self.Proprietaire" Multiplicity="1" />
+          <End Role="Possession" Type="Self.Possession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proprietaire">
+              <PropertyRef Name="IdProprietaire" />
+            </Principal>
+            <Dependent Role="Possession">
+              <PropertyRef Name="IdProprietaire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKVehiculePossede_FK">
+          <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="1" />
+          <End Role="Possession" Type="Self.Possession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicule">
+              <PropertyRef Name="IdVehicule" />
+            </Principal>
+            <Dependent Role="Possession">
+              <PropertyRef Name="IdVehicule" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKVisiteVehicule_FK">
+          <End Role="Possession" Type="Self.Possession" Multiplicity="1" />
+          <End Role="Visite" Type="Self.Visite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Possession">
+              <PropertyRef Name="IdPossession" />
+            </Principal>
+            <Dependent Role="Visite">
+              <PropertyRef Name="IdPossession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKTypeModeleVehicule_FK">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="IdType" />
+            </Principal>
+            <Dependent Role="Vehicule">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LangueConcessionnaire">
+          <End Role="Concessionnaire" Type="Self.Concessionnaire" Multiplicity="*" />
+          <End Role="Langue" Type="Self.Langue" Multiplicity="*" />
+        </Association>
+        <Association Name="OptionModele">
+          <End Role="OptionV" Type="Self.OptionV" Multiplicity="*" />
+          <End Role="Type" Type="Self.Type" Multiplicity="*" />
+        </Association>
+        <Association Name="OptionNonStandard">
+          <End Role="OptionV" Type="Self.OptionV" Multiplicity="*" />
+          <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MarqueOpenEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Concessionnaire" EntityType="Self.Concessionnaire" />
+          <EntitySet Name="DegreQualification" EntityType="Self.DegreQualification" />
+          <EntitySet Name="Devis" EntityType="Self.Devis" />
+          <EntitySet Name="FactureDueNonPayee" EntityType="Self.FactureDueNonPayee" />
+          <EntitySet Name="Jante" EntityType="Self.Jante" />
+          <EntitySet Name="Langue" EntityType="Self.Langue" />
+          <EntitySet Name="LanguePiece" EntityType="Self.LanguePiece" />
+          <EntitySet Name="LieuStockage" EntityType="Self.LieuStockage" />
+          <EntitySet Name="Ligne" EntityType="Self.Ligne" />
+          <EntitySet Name="LigneCommentaire" EntityType="Self.LigneCommentaire" />
+          <EntitySet Name="LigneOperation" EntityType="Self.LigneOperation" />
+          <EntitySet Name="LignePiece" EntityType="Self.LignePiece" />
+          <EntitySet Name="ListePieceConsommable" EntityType="Self.ListePieceConsommable" />
+          <EntitySet Name="Marque" EntityType="Self.Marque" />
+          <EntitySet Name="Modele" EntityType="Self.Modele" />
+          <EntitySet Name="NumTelOuvrier" EntityType="Self.NumTelOuvrier" />
+          <EntitySet Name="NumTelProprio" EntityType="Self.NumTelProprio" />
+          <EntitySet Name="Operation" EntityType="Self.Operation" />
+          <EntitySet Name="OperationVisite" EntityType="Self.OperationVisite" />
+          <EntitySet Name="OptionV" EntityType="Self.OptionV" />
+          <EntitySet Name="Ouvrier" EntityType="Self.Ouvrier" />
+          <EntitySet Name="PieceConsommable" EntityType="Self.PieceConsommable" />
+          <EntitySet Name="Possession" EntityType="Self.Possession" />
+          <EntitySet Name="Proprietaire" EntityType="Self.Proprietaire" />
+          <EntitySet Name="Type" EntityType="Self.Type" />
+          <EntitySet Name="Vehicule" EntityType="Self.Vehicule" />
+          <EntitySet Name="Visite" EntityType="Self.Visite" />
+          <AssociationSet Name="FKConcessionnaireMarque_FK" Association="Self.FKConcessionnaireMarque_FK">
+            <End Role="Marque" EntitySet="Marque" />
+            <End Role="Concessionnaire" EntitySet="Concessionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FKOuvrierQualification_FK" Association="Self.FKOuvrierQualification_FK">
+            <End Role="DegreQualification" EntitySet="DegreQualification" />
+            <End Role="Ouvrier" EntitySet="Ouvrier" />
+          </AssociationSet>
+          <AssociationSet Name="FKDevisVehicule_FK" Association="Self.FKDevisVehicule_FK">
+            <End Role="Possession" EntitySet="Possession" />
+            <End Role="Devis" EntitySet="Devis" />
+          </AssociationSet>
+          <AssociationSet Name="FKDevisVisite_FK" Association="Self.FKDevisVisite_FK">
+            <End Role="Devis" EntitySet="Devis" />
+            <End Role="Visite" EntitySet="Visite" />
+          </AssociationSet>
+          <AssociationSet Name="FKLigneDevis_FK" Association="Self.FKLigneDevis_FK">
+            <End Role="Devis" EntitySet="Devis" />
+            <End Role="Ligne" EntitySet="Ligne" />
+          </AssociationSet>
+          <AssociationSet Name="FKFactureVisite_FK" Association="Self.FKFactureVisite_FK">
+            <End Role="Visite" EntitySet="Visite" />
+            <End Role="FactureDueNonPayee" EntitySet="FactureDueNonPayee" />
+          </AssociationSet>
+          <AssociationSet Name="FKJanteUtilise_FK" Association="Self.FKJanteUtilise_FK">
+            <End Role="Jante" EntitySet="Jante" />
+            <End Role="Vehicule" EntitySet="Vehicule" />
+          </AssociationSet>
+          <AssociationSet Name="FKLan_Lan" Association="Self.FKLan_Lan">
+            <End Role="Langue" EntitySet="Langue" />
+            <End Role="LanguePiece" EntitySet="LanguePiece" />
+          </AssociationSet>
+          <AssociationSet Name="FKLangueProprio_FK" Association="Self.FKLangueProprio_FK">
+            <End Role="Langue" EntitySet="Langue" />
+            <End Role="Proprietaire" EntitySet="Proprietaire" />
+          </AssociationSet>
+          <AssociationSet Name="FKLan_Pie_FK" Association="Self.FKLan_Pie_FK">
+            <End Role="PieceConsommable" EntitySet="PieceConsommable" />
+            <End Role="LanguePiece" EntitySet="LanguePiece" />
+          </AssociationSet>
+          <AssociationSet Name="FKLieuS_FK" Association="Self.FKLieuS_FK">
+            <End Role="LieuStockage" EntitySet="LieuStockage" />
+            <End Role="PieceConsommable" EntitySet="PieceConsommable" />
+          </AssociationSet>
+          <AssociationSet Name="FKLigneC_FK" Association="Self.FKLigneC_FK">
+            <End Role="Ligne" EntitySet="Ligne" />
+            <End Role="LigneCommentaire" EntitySet="LigneCommentaire" />
+          </AssociationSet>
+          <AssociationSet Name="FKLigneO_FK" Association="Self.FKLigneO_FK">
+            <End Role="Ligne" EntitySet="Ligne" />
+            <End Role="LigneOperation" EntitySet="LigneOperation" />
+          </AssociationSet>
+          <AssociationSet Name="FKLigneP_FK" Association="Self.FKLigneP_FK">
+            <End Role="Ligne" EntitySet="Ligne" />
+            <End Role="LignePiece" EntitySet="LignePiece" />
+          </AssociationSet>
+          <AssociationSet Name="FKOperationLigne_FK" Association="Self.FKOperationLigne_FK">
+            <End Role="Operation" EntitySet="Operation" />
+            <End Role="LigneOperation" EntitySet="LigneOperation" />
+          </AssociationSet>
+          <AssociationSet Name="FKPieceC_FK" Association="Self.FKPieceC_FK">
+            <End Role="PieceConsommable" EntitySet="PieceConsommable" />
+            <End Role="LignePiece" EntitySet="LignePiece" />
+          </AssociationSet>
+          <AssociationSet Name="FKLis_Pie" Association="Self.FKLis_Pie">
+            <End Role="PieceConsommable" EntitySet="PieceConsommable" />
+            <End Role="ListePieceConsommable" EntitySet="ListePieceConsommable" />
+          </AssociationSet>
+          <AssociationSet Name="FKLis_Vis_FK" Association="Self.FKLis_Vis_FK">
+            <End Role="Visite" EntitySet="Visite" />
+            <End Role="ListePieceConsommable" EntitySet="ListePieceConsommable" />
+          </AssociationSet>
+          <AssociationSet Name="FKMarqueModele_FK" Association="Self.FKMarqueModele_FK">
+            <End Role="Marque" EntitySet="Marque" />
+            <End Role="Modele" EntitySet="Modele" />
+          </AssociationSet>
+          <AssociationSet Name="FKModeleType" Association="Self.FKModeleType">
+            <End Role="Modele" EntitySet="Modele" />
+            <End Role="Type" EntitySet="Type" />
+          </AssociationSet>
+          <AssociationSet Name="FKTelOuvrier_FK" Association="Self.FKTelOuvrier_FK">
+            <End Role="Ouvrier" EntitySet="Ouvrier" />
+            <End Role="NumTelOuvrier" EntitySet="NumTelOuvrier" />
+          </AssociationSet>
+          <AssociationSet Name="FKTelProprio_FK" Association="Self.FKTelProprio_FK">
+            <End Role="Proprietaire" EntitySet="Proprietaire" />
+            <End Role="NumTelProprio" EntitySet="NumTelProprio" />
+          </AssociationSet>
+          <AssociationSet Name="FKOpe_Ope_FK" Association="Self.FKOpe_Ope_FK">
+            <End Role="Operation" EntitySet="Operation" />
+            <End Role="OperationVisite" EntitySet="OperationVisite" />
+          </AssociationSet>
+          <AssociationSet Name="FKOperationOuvrier_FK" Association="Self.FKOperationOuvrier_FK">
+            <End Role="Ouvrier" EntitySet="Ouvrier" />
+            <End Role="Operation" EntitySet="Operation" />
+          </AssociationSet>
+          <AssociationSet Name="FKOpe_Vis" Association="Self.FKOpe_Vis">
+            <End Role="Visite" EntitySet="Visite" />
+            <End Role="OperationVisite" EntitySet="OperationVisite" />
+          </AssociationSet>
+          <AssociationSet Name="FKProprietaireVehicule_FK" Association="Self.FKProprietaireVehicule_FK">
+            <End Role="Proprietaire" EntitySet="Proprietaire" />
+            <End Role="Possession" EntitySet="Possession" />
+          </AssociationSet>
+          <AssociationSet Name="FKVehiculePossede_FK" Association="Self.FKVehiculePossede_FK">
+            <End Role="Vehicule" EntitySet="Vehicule" />
+            <End Role="Possession" EntitySet="Possession" />
+          </AssociationSet>
+          <AssociationSet Name="FKVisiteVehicule_FK" Association="Self.FKVisiteVehicule_FK">
+            <End Role="Possession" EntitySet="Possession" />
+            <End Role="Visite" EntitySet="Visite" />
+          </AssociationSet>
+          <AssociationSet Name="FKTypeModeleVehicule_FK" Association="Self.FKTypeModeleVehicule_FK">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Vehicule" EntitySet="Vehicule" />
+          </AssociationSet>
+          <AssociationSet Name="LangueConcessionnaire" Association="Self.LangueConcessionnaire">
+            <End Role="Concessionnaire" EntitySet="Concessionnaire" />
+            <End Role="Langue" EntitySet="Langue" />
+          </AssociationSet>
+          <AssociationSet Name="OptionModele" Association="Self.OptionModele">
+            <End Role="OptionV" EntitySet="OptionV" />
+            <End Role="Type" EntitySet="Type" />
+          </AssociationSet>
+          <AssociationSet Name="OptionNonStandard" Association="Self.OptionNonStandard">
+            <End Role="OptionV" EntitySet="OptionV" />
+            <End Role="Vehicule" EntitySet="Vehicule" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MarqueOpenModelStoreContainer" CdmEntityContainer="MarqueOpenEntities">
+          <EntitySetMapping Name="Concessionnaire">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Concessionnaire">
+              <MappingFragment StoreEntitySet="Concessionnaire">
+                <ScalarProperty Name="IdConcessionnaire" ColumnName="IdConcessionnaire" />
+                <ScalarProperty Name="NomConcessionnaire" ColumnName="NomConcessionnaire" />
+                <ScalarProperty Name="Adr_Rue" ColumnName="Adr_Rue" />
+                <ScalarProperty Name="Adr_Numero" ColumnName="Adr_Numero" />
+                <ScalarProperty Name="IdMarque" ColumnName="IdMarque" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DegreQualification">
+            <EntityTypeMapping TypeName="MarqueOpenModel.DegreQualification">
+              <MappingFragment StoreEntitySet="DegreQualification">
+                <ScalarProperty Name="IdQualification" ColumnName="IdQualification" />
+                <ScalarProperty Name="Degre" ColumnName="Degre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Devis">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Devis">
+              <MappingFragment StoreEntitySet="Devis">
+                <ScalarProperty Name="IdDevis" ColumnName="IdDevis" />
+                <ScalarProperty Name="NumDevis" ColumnName="NumDevis" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Descriptif" ColumnName="Descriptif" />
+                <ScalarProperty Name="IdPossession" ColumnName="IdPossession" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FactureDueNonPayee">
+            <EntityTypeMapping TypeName="MarqueOpenModel.FactureDueNonPayee">
+              <MappingFragment StoreEntitySet="FactureDueNonPayee">
+                <ScalarProperty Name="IdFactureDueNonPaye" ColumnName="IdFactureDueNonPaye" />
+                <ScalarProperty Name="IdVisite" ColumnName="IdVisite" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Montant" ColumnName="Montant" />
+                <ScalarProperty Name="DateEcheance" ColumnName="DateEcheance" />
+                <ScalarProperty Name="MontantEnAccompte" ColumnName="MontantEnAccompte" />
+                <ScalarProperty Name="Descriptif" ColumnName="Descriptif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jante">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Jante">
+              <MappingFragment StoreEntitySet="Jante">
+                <ScalarProperty Name="CodeJante" ColumnName="CodeJante" />
+                <ScalarProperty Name="Pouce" ColumnName="Pouce" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Langue">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Langue">
+              <MappingFragment StoreEntitySet="Langue">
+                <ScalarProperty Name="CodeLangue" ColumnName="CodeLangue" />
+                <ScalarProperty Name="LibelleLangue" ColumnName="LibelleLangue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LanguePiece">
+            <EntityTypeMapping TypeName="MarqueOpenModel.LanguePiece">
+              <MappingFragment StoreEntitySet="LanguePiece">
+                <ScalarProperty Name="CodeLangue" ColumnName="CodeLangue" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="TraductionPiece" ColumnName="TraductionPiece" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LieuStockage">
+            <EntityTypeMapping TypeName="MarqueOpenModel.LieuStockage">
+              <MappingFragment StoreEntitySet="LieuStockage">
+                <ScalarProperty Name="CodeLieuStockage" ColumnName="CodeLieuStockage" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ligne">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Ligne">
+              <MappingFragment StoreEntitySet="Ligne">
+                <ScalarProperty Name="IdLigne" ColumnName="IdLigne" />
+                <ScalarProperty Name="NumeroLigne" ColumnName="NumeroLigne" />
+                <ScalarProperty Name="TypeLigne" ColumnName="TypeLigne" />
+                <ScalarProperty Name="IdDevis" ColumnName="IdDevis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LigneCommentaire">
+            <EntityTypeMapping TypeName="MarqueOpenModel.LigneCommentaire">
+              <MappingFragment StoreEntitySet="LigneCommentaire">
+                <ScalarProperty Name="IdLigne" ColumnName="IdLigne" />
+                <ScalarProperty Name="Texte" ColumnName="Texte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LigneOperation">
+            <EntityTypeMapping TypeName="MarqueOpenModel.LigneOperation">
+              <MappingFragment StoreEntitySet="LigneOperation">
+                <ScalarProperty Name="IdLigne" ColumnName="IdLigne" />
+                <ScalarProperty Name="Temps" ColumnName="Temps" />
+                <ScalarProperty Name="CoutHoraire" ColumnName="CoutHoraire" />
+                <ScalarProperty Name="IdOperation" ColumnName="IdOperation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LignePiece">
+            <EntityTypeMapping TypeName="MarqueOpenModel.LignePiece">
+              <MappingFragment StoreEntitySet="LignePiece">
+                <ScalarProperty Name="IdLigne" ColumnName="IdLigne" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListePieceConsommable">
+            <EntityTypeMapping TypeName="MarqueOpenModel.ListePieceConsommable">
+              <MappingFragment StoreEntitySet="ListePieceConsommable">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IdVisite" ColumnName="IdVisite" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marque">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Marque">
+              <MappingFragment StoreEntitySet="Marque">
+                <ScalarProperty Name="IdMarque" ColumnName="IdMarque" />
+                <ScalarProperty Name="NomMarque" ColumnName="NomMarque" />
+                <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modele">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Modele">
+              <MappingFragment StoreEntitySet="Modele">
+                <ScalarProperty Name="IdModele" ColumnName="IdModele" />
+                <ScalarProperty Name="NomModele" ColumnName="NomModele" />
+                <ScalarProperty Name="IdMarque" ColumnName="IdMarque" />
+                <ScalarProperty Name="Descriptif" ColumnName="Descriptif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NumTelOuvrier">
+            <EntityTypeMapping TypeName="MarqueOpenModel.NumTelOuvrier">
+              <MappingFragment StoreEntitySet="NumTelOuvrier">
+                <ScalarProperty Name="IdNumTelOuvrier" ColumnName="IdNumTelOuvrier" />
+                <ScalarProperty Name="NumTelOuvrier1" ColumnName="NumTelOuvrier" />
+                <ScalarProperty Name="CodeOuvrier" ColumnName="CodeOuvrier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NumTelProprio">
+            <EntityTypeMapping TypeName="MarqueOpenModel.NumTelProprio">
+              <MappingFragment StoreEntitySet="NumTelProprio">
+                <ScalarProperty Name="IdNumTelProprio" ColumnName="IdNumTelProprio" />
+                <ScalarProperty Name="NumTelProprio1" ColumnName="NumTelProprio" />
+                <ScalarProperty Name="IdProprietaire" ColumnName="IdProprietaire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Operation">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Operation">
+              <MappingFragment StoreEntitySet="Operation">
+                <ScalarProperty Name="IdOperation" ColumnName="IdOperation" />
+                <ScalarProperty Name="CodeOperation" ColumnName="CodeOperation" />
+                <ScalarProperty Name="Descriptif" ColumnName="Descriptif" />
+                <ScalarProperty Name="DureeHabituelle" ColumnName="DureeHabituelle" />
+                <ScalarProperty Name="PrixUnitaire" ColumnName="PrixUnitaire" />
+                <ScalarProperty Name="CodeOuvrier" ColumnName="CodeOuvrier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OperationVisite">
+            <EntityTypeMapping TypeName="MarqueOpenModel.OperationVisite">
+              <MappingFragment StoreEntitySet="OperationVisite">
+                <ScalarProperty Name="IdOperation" ColumnName="IdOperation" />
+                <ScalarProperty Name="IdVisite" ColumnName="IdVisite" />
+                <ScalarProperty Name="DureeEffective" ColumnName="DureeEffective" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OptionV">
+            <EntityTypeMapping TypeName="MarqueOpenModel.OptionV">
+              <MappingFragment StoreEntitySet="OptionV">
+                <ScalarProperty Name="IdOption" ColumnName="IdOption" />
+                <ScalarProperty Name="CodeOption" ColumnName="CodeOption" />
+                <ScalarProperty Name="NomOption" ColumnName="NomOption" />
+                <ScalarProperty Name="Descriptif" ColumnName="Descriptif" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ouvrier">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Ouvrier">
+              <MappingFragment StoreEntitySet="Ouvrier">
+                <ScalarProperty Name="CodeOuvrier" ColumnName="CodeOuvrier" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="DateEntree" ColumnName="DateEntree" />
+                <ScalarProperty Name="IdQualification" ColumnName="IdQualification" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PieceConsommable">
+            <EntityTypeMapping TypeName="MarqueOpenModel.PieceConsommable">
+              <MappingFragment StoreEntitySet="PieceConsommable">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Denomination" ColumnName="Denomination" />
+                <ScalarProperty Name="PrixUnitaire" ColumnName="PrixUnitaire" />
+                <ScalarProperty Name="QuantiteTheorique" ColumnName="QuantiteTheorique" />
+                <ScalarProperty Name="DateDernierReleve" ColumnName="DateDernierReleve" />
+                <ScalarProperty Name="QuantiteStockDernierReleve" ColumnName="QuantiteStockDernierReleve" />
+                <ScalarProperty Name="Consommable" ColumnName="Consommable" />
+                <ScalarProperty Name="CodeLieuStockage" ColumnName="CodeLieuStockage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Possession">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Possession">
+              <MappingFragment StoreEntitySet="Possession">
+                <ScalarProperty Name="IdPossession" ColumnName="IdPossession" />
+                <ScalarProperty Name="IdVehicule" ColumnName="IdVehicule" />
+                <ScalarProperty Name="NumMineralogique" ColumnName="NumMineralogique" />
+                <ScalarProperty Name="DateAchat" ColumnName="DateAchat" />
+                <ScalarProperty Name="DateVendu" ColumnName="DateVendu" />
+                <ScalarProperty Name="DateImmatriculation" ColumnName="DateImmatriculation" />
+                <ScalarProperty Name="IdProprietaire" ColumnName="IdProprietaire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proprietaire">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Proprietaire">
+              <MappingFragment StoreEntitySet="Proprietaire">
+                <ScalarProperty Name="IdProprietaire" ColumnName="IdProprietaire" />
+                <ScalarProperty Name="NumRegNational" ColumnName="NumRegNational" />
+                <ScalarProperty Name="NomProprio" ColumnName="NomProprio" />
+                <ScalarProperty Name="PrenomProprio" ColumnName="PrenomProprio" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="CodeLangue" ColumnName="CodeLangue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+                <ScalarProperty Name="NomTypeModele" ColumnName="NomTypeModele" />
+                <ScalarProperty Name="IdModele" ColumnName="IdModele" />
+                <ScalarProperty Name="Cylindree" ColumnName="Cylindree" />
+                <ScalarProperty Name="Motorisation" ColumnName="Motorisation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicule">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Vehicule">
+              <MappingFragment StoreEntitySet="Vehicule">
+                <ScalarProperty Name="IdVehicule" ColumnName="IdVehicule" />
+                <ScalarProperty Name="NumChassis" ColumnName="NumChassis" />
+                <ScalarProperty Name="AnneeFabrication" ColumnName="AnneeFabrication" />
+                <ScalarProperty Name="TypeVehicule" ColumnName="TypeVehicule" />
+                <ScalarProperty Name="ChargeMax" ColumnName="ChargeMax" />
+                <ScalarProperty Name="DateDernierControle" ColumnName="DateDernierControle" />
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+                <ScalarProperty Name="CodeJante" ColumnName="CodeJante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visite">
+            <EntityTypeMapping TypeName="MarqueOpenModel.Visite">
+              <MappingFragment StoreEntitySet="Visite">
+                <ScalarProperty Name="IdVisite" ColumnName="IdVisite" />
+                <ScalarProperty Name="DateEntree" ColumnName="DateEntree" />
+                <ScalarProperty Name="NumVisite" ColumnName="NumVisite" />
+                <ScalarProperty Name="DateSortie" ColumnName="DateSortie" />
+                <ScalarProperty Name="CoutFactureVisite" ColumnName="CoutFactureVisite" />
+                <ScalarProperty Name="Descriptif" ColumnName="Descriptif" />
+                <ScalarProperty Name="IdPossession" ColumnName="IdPossession" />
+                <ScalarProperty Name="IdDevis" ColumnName="IdDevis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="LangueConcessionnaire" TypeName="MarqueOpenModel.LangueConcessionnaire" StoreEntitySet="LangueConcessionnaire">
+            <EndProperty Name="Concessionnaire">
+              <ScalarProperty Name="IdConcessionnaire" ColumnName="IdConcessionnaire" />
+            </EndProperty>
+            <EndProperty Name="Langue">
+              <ScalarProperty Name="CodeLangue" ColumnName="CodeLangue" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="OptionModele" TypeName="MarqueOpenModel.OptionModele" StoreEntitySet="OptionModele">
+            <EndProperty Name="OptionV">
+              <ScalarProperty Name="IdOption" ColumnName="IdOption" />
+            </EndProperty>
+            <EndProperty Name="Type">
+              <ScalarProperty Name="IdType" ColumnName="IdType" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="OptionNonStandard" TypeName="MarqueOpenModel.OptionNonStandard" StoreEntitySet="OptionNonStandard">
+            <EndProperty Name="OptionV">
+              <ScalarProperty Name="IdOption" ColumnName="IdOption" />
+            </EndProperty>
+            <EndProperty Name="Vehicule">
+              <ScalarProperty Name="IdVehicule" ColumnName="IdVehicule" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
